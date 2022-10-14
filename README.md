@@ -1,47 +1,44 @@
-Build a FullStack App with Next.js, Supabase & Prisma | The Modern Dev by
-[AlterClass.io](https://alterclass.io).
 
-- Learn to build this application step-by-step by following the FREE course on
-  [The Modern Dev](https://themodern.dev/).
+## 依赖说明
+* Next 服务端渲染
+* Prisma ORM
+* supabase 数据存储方案 
+  * postgresql 用户数据
+  * bucket 媒体数据
 
-- Preview the app live [here](https://supa-vacation.vercel.app/).
+* next-auth 提供auth2认证
 
-- Deploy the same app using Vercel:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/AlterClassIO/supa-vacation&project-name=SupaVacation+by+The+Modern+Dev&repository-name=SupaVacation+by+The+Modern+Dev)
 
-[![SupaVacation](https://user-images.githubusercontent.com/4352286/152961498-0e7d1575-a2a2-4aae-93e0-a75e701cef06.png)](https://supa-vacation.vercel.app/)
+## 安装
 
-## Getting Started
-
-### 1. Clone the repository and install dependencies
+### 1. 克隆仓库然后下载依赖
 
 ```
-git clone https://github.com/AlterClassIO/supa-vacation
-cd supa-vacation
+git clone https://github.com/zqa2048/next-prisma-supabase-auth.git
+cd next-prisma-supabase-auth
 npm install
 ```
 
-### 2. Configure your local environment
+### 2. 配置本地环境变量
 
-Rename the `.env.example` file in this directory to `.env` (which
-will be ignored by Git):
+ 将`.env.example` 替换 `.env`(记得忽略git提交):
 
 ```
 cp .env.local.example .env.local
 ```
+然后填入你自己的变量 
 
-Add your own values for all the environment variables.
 
-### 3. Start the application
+### 3. 运行
 
-To run your site locally, use:
+
 
 ```
 npm run dev
 ```
 
-To run it in production mode, use:
+或者
 
 ```
 npm run build
@@ -49,5 +46,4 @@ npm run start
 ```
 
 ## License
-
-[MIT](https://github.com/AlterClassIO/supa-vacation/blob/master/LICENSE)
+暂无
