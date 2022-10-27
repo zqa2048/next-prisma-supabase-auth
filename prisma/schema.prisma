@@ -49,7 +49,7 @@ model Session{
 	id   				Int    @id @default(autoincrement())
 	sessionToken		String	@unique
 	userId				Int
-	expries				DateTime
+	expires				DateTime
 	user				User	@relation(fields:[userId],references:[id],onDelete:Cascade)
 }
 

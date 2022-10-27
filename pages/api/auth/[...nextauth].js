@@ -21,5 +21,11 @@ export default NextAuth({
             maxAge: 10 * 60
         })
     ],
-    adapter:PrismaAdapter(prisma)
+    adapter:PrismaAdapter(prisma),
+    pages:{
+        signIn:'/',
+        signOut:'/',
+        error:'/',
+        verifyRequest:'/',
+    },
 })
