@@ -10,7 +10,7 @@ async function handler(req,res){
             data:{  
                 image:null, 
                 title:'纽约', 
-                descripttion:'金融中心观景房', 
+                description:'金融中心观景房', 
                 price:300, 
                 guests:3, 
                 beds:4,
@@ -24,14 +24,14 @@ async function handler(req,res){
 
 }
 
-/* ;(async()=>{
+;(async()=>{
     await handler()
-})() */
+})()
 
-async function getAllIds (){
-    const ids = await prisma.home.findMany({
-        select:{id:true}
-    })
-    console.log('ids', ids)
-}
-getAllIds()
+// async function getAllIds (){
+//     const ids = await prisma.home.findMany({
+//         select:{id:true}
+//     })
+//     console.log('ids', ids)
+// }
+// getAllIds()
