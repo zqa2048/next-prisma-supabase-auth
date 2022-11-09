@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+
 import PropTypes from 'prop-types';
 import AuthModal from './AuthModal';
 import { Menu, Transition } from '@headlessui/react';
@@ -75,16 +76,18 @@ const Layout = ({ children = null }) => {
                 <a className="flex items-center space-x-1">
                   <SparklesIcon className="shrink-0 w-8 h-8 text-rose-500" />
                   <span className="text-xl font-semibold tracking-wide">
-                    如<span className="text-rose-600">家</span>
+                    民<span className="text-rose-600">宿</span>
                   </span>
                 </a>
               </Link>
               <div className="flex items-center space-x-4">
-                <Link href="/create">
+                <button onClick={()=>{
+                  session?.user ? router.push('/create') : openModal()
+                }}>
                   <a className="hidden sm:block hover:bg-gray-200 transition px-3 py-1 rounded-md">
-                    介绍好地方
+                    添加记录
                   </a>
-                </Link>
+                </button>
                 {isLoadingUser ? (
                   <div className="h-8 w-[75px] bg-gray-200 animate-pulse rounded-md" />
                 ) : user ? (

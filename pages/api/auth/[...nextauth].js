@@ -6,6 +6,7 @@ import { PrismaClient } from "@prisma/client";
 import Handlebars from "handlebars";
 import { readFileSync } from "fs";
 import path from "path";
+import GoogleProvider from 'next-auth/providers/google'
 
 const prisma = new PrismaClient();
 
@@ -18,6 +19,30 @@ const transporter = nodemailer.createTransport({
   },
   secure: true,
 });
+
+
+const sendWelcomeEmail = async ({ user }) => {
+    const { email } = user;
+  
+    try {
+      const emailFile = readFileSync(path.join(emailsDir, 'welcome.html'), {
+        encoding: 'utf8',
+      });
+      const emailTemplate = Handlebars.compile(emailFile);
+      await transporter.sendMail({
+        from: `"✨ 民宿" ${process.env.EMAIL_FROM}`,
+        to: email,
+        subject: '欢迎登入! 🎉',
+        html: emailTemplate({
+          base_url: process.env.NEXTAUTH_URL,
+          support_email: 'support@themodern.dev',
+        }),
+      });
+    } catch (error) {
+      console.log(`❌ 无法向用户发送欢迎电子邮件 (${email})`);
+    }
+  };
+
 
 const emailsDir = path.resolve(process.cwd(), "emails");
 
@@ -46,10 +71,18 @@ export default NextAuth({
     verifyRequest: "/",
   },
   providers: [
+    GoogleProvider({
+        clientId: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
+        httpOptions: {
+            timeout: 40000,
+          },
+    }),
     EmailProvider({
         maxAge: 10 * 60,
         sendVerificationRequest,
     }),
   ],
+  events:{ createUser: sendWelcomeEmail},
   adapter: PrismaAdapter(prisma),
 });
