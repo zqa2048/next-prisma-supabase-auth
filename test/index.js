@@ -6,18 +6,11 @@ const prisma = new PrismaClient()
 async function handler(req,res){
     try{
 
-        const home = await prisma.home.create({
-            data:{  
-                image:null, 
-                title:'纽约', 
-                description:'金融中心观景房', 
-                price:300, 
-                guests:3, 
-                beds:4,
-                baths:5
-            }
+        const { owner } = await prisma.home.findUnique({
+            where:{id:2},
+            select:{owner:true}
         })
-        console.log('home', home)
+        console.log('owner', owner)
        } catch (error) {
         console.log('error', error)
        }

@@ -10,6 +10,7 @@ import axios from 'axios'
 
 
 
+
 const ListingSchema = Yup.object().shape({
   title: Yup.string().trim().required(),
   description: Yup.string().trim().required(),
@@ -25,10 +26,12 @@ const ListingForm = ({
   buttonText = 'Submit',
   onSubmit = () => null,
 }) => {
+
   const router = useRouter();
 
   const [disabled, setDisabled] = useState(false);
   const [imageUrl, setImageUrl] = useState(initialValues?.image ?? '');
+
 
   const upload = async image => {
     // TODO: Upload image to remote storage
