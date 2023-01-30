@@ -4,26 +4,25 @@ import axios from 'axios';
 import {getSession} from 'next-auth/react'
 
 
-export async function getServerSideProps(context){
-  const session = await getSession(context)
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
   console.log("session :>> ", session);
-  if (!session) {
+  if (!session?.user) {
     return {
       redirect: {
-        destination: '/',
+        destination: "/",
         permanent: false,
       },
     };
   }
-  
+
   return {
-    props: {}
-  }
+    props: {},
+  };
 }
 
-
 const Create = () => {
-  const addHome = data => axios.post('/api/homes',data);
+  const addHome = (data) => axios.post("/api/homes", data);
 
   return (
     <Layout>
@@ -34,7 +33,7 @@ const Create = () => {
         </p>
         <div className="mt-8">
           <ListingForm
-            buttonText="Add home"
+            buttonText="添加房屋"
             redirectPath="/"
             onSubmit={addHome}
           />

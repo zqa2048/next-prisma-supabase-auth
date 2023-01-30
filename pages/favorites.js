@@ -1,12 +1,11 @@
+import { getSession } from "next-auth/react";
+import { prisma } from "@/lib/prisma";
+
 import Layout from "@/components/Layout";
 import Grid from "@/components/Grid";
-import { getSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 
 export async function getServerSideProps(context) {
+  // Check if user is authenticated
   const session = await getSession(context);
 
   // If not, redirect to the homepage
@@ -18,10 +17,16 @@ export async function getServerSideProps(context) {
       },
     };
   }
+
+  // Get all homes from the authenticated user
   const { favoriteHomes } = await prisma.user.findUnique({
     where: { email: session.user.email },
-    include: { favoriteHomes: true },
+    include: {
+      favoriteHomes: true,
+    },
   });
+
+  // Pass the data to the Homes component
   return {
     props: {
       homes: JSON.parse(JSON.stringify(favoriteHomes)),
@@ -30,14 +35,12 @@ export async function getServerSideProps(context) {
 }
 
 const Favorites = ({ homes = [] }) => {
-  const [chenged, setChanged] = useState(false);
-  useEffect(() => {}, [chenged]);
   return (
     <Layout>
       <h1 className="text-xl font-medium text-gray-800">喜欢列表</h1>
       <p className="text-gray-500">管理您的房源并更新房源</p>
       <div className="mt-8">
-        <Grid homes={homes} handle={setChanged} />
+        <Grid homes={homes} />
       </div>
     </Layout>
   );
