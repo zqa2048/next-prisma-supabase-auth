@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
+
   if (!session) {
     return res.status(401).json({ message: "无权限", data: session });
   }
@@ -17,7 +18,8 @@ export default async function handler(req, res) {
           favoriteHomes: true,
         },
       });
-      console.log("object :>> ", favoriteHomes);
+      console.log("process1111111 :>> ", process.env.NODE_ENV);
+      console.log("object22222222 :>> ", favoriteHomes);
       res.status(200).json(favoriteHomes);
     } catch (error) {
       console.log("error :>> ", error);

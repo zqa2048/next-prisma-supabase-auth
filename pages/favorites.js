@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-const Homes = ({ homes = [] }) => {
+const Favorites = ({ homes = [] }) => {
   const [chenged, setChanged] = useState(false);
   useEffect(() => {}, [chenged]);
   return (
@@ -41,4 +41,4 @@ const Homes = ({ homes = [] }) => {
   );
 };
 
-export default Homes;
+export default Favorites;

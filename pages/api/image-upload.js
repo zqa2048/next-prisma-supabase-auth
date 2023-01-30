@@ -1,7 +1,12 @@
 import { nanoid } from "nanoid";
 import { decode } from "base64-arraybuffer";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@supabase/supabase-js";
 
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
