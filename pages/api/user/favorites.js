@@ -4,7 +4,7 @@ import { getSession } from "next-auth/react";
 export default async function handler(req, res) {
   const session = await getSession({ req });
   if (!session) {
-    return res.status(401).json({ message: "无权限" });
+    return res.status(401).json({ message: "无权限", data: session });
   }
 
   if (req.method === "GET") {
