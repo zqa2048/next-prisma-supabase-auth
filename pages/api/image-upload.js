@@ -1,11 +1,6 @@
-import { createClient } from "@supabase/supabase-js";
 import { nanoid } from "nanoid";
 import { decode } from "base64-arraybuffer";
-
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+import { supabase } from "@/lib/supabase";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -14,7 +9,7 @@ export default async function handler(req, res) {
       if (!image) {
         return res.status(500).json({ message: "没有照片" });
       }
-    //   console.log("image", image);
+      //   console.log("image", image);
       const type = image.match(/data:(.*);base64,/)?.[1];
       const base64FileData = image.split("base64,")?.[1];
 
@@ -25,15 +20,15 @@ export default async function handler(req, res) {
         const ext = type.split("/")[1];
         const path = `${fileName}.${ext}`;
 
-        console.log('path', path)
+        console.log("path", path);
 
         const { data, error: uploadError } = await supabase.storage
           .from(process.env.SUPABASE_BUCKET)
           .upload(path, decode(base64FileData), {
-            contentType:type,
+            contentType: type,
             upsert: true,
           });
-          console.log('data', data)
+        console.log("data", data);
         if (uploadError) {
           throw new Error("图片存储失败");
         }
@@ -44,7 +39,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ url });
       }
     } catch (error) {
-        console.log('error', error)
+      console.log("error", error);
       res.status(500).json({ message: "服务器异常" });
     }
   } else {

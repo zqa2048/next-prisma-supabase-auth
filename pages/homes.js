@@ -28,10 +28,8 @@ export async function getServerSideProps(context) {
 const Homes = ({ homes = [] }) => {
   return (
     <Layout>
-      <h1 className="text-xl font-medium text-gray-800">Your listings</h1>
-      <p className="text-gray-500">
-        管理您的房源并更新房源
-      </p>
+      <h1 className="text-xl font-medium text-gray-800">我的房屋</h1>
+      <p className="text-gray-500">管理或更新您的房源</p>
       <div className="mt-8">
         <Grid homes={homes} />
       </div>

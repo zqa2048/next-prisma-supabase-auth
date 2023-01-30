@@ -97,12 +97,12 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
 
   const signInWithGoogle = () => {
     // TODO: Perform Google auth
-
-      toast.loading('跳转中')
-      setDisabled(true)
-      signIn('google',{
-        callbackUrl: window.location.href
-      })
+      console.log("1111 :>> ", 1111);
+      toast.loading("跳转中");
+      setDisabled(true);
+      signIn("google", {
+        callbackUrl: window.location.href,
+      });
 
   };
 
@@ -184,7 +184,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                       <a className="flex items-center space-x-1">
                         <SparklesIcon className="shrink-0 w-8 h-8 text-rose-500" />
                         <span className="text-xl font-semibold tracking-wide">
-                          Supa<span className="text-rose-500">Vacation</span>
+                          民<span className="text-rose-500">宿</span>
                         </span>
                       </a>
                     </Link>
@@ -194,13 +194,12 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                     as="h3"
                     className="mt-6 font-bold text-lg sm:text-2xl text-center"
                   >
-                    {showSignIn ? 'Welcome back!' : 'Create your account'}
+                    {showSignIn ? "Welcome back!" : "Create your account"}
                   </Dialog.Title>
 
                   {!showSignIn ? (
                     <Dialog.Description className="mt-2 text-gray-500 text-base text-center">
-                      Please create an account to list your homes and bookmark
-                      your favorite ones.
+                      请创建一个帐户来列出您的房子和你喜欢的收藏。
                     </Dialog.Description>
                   ) : null}
 
@@ -217,12 +216,12 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                         width={32}
                         height={32}
                       />
-                      <span>Sign {showSignIn ? 'in' : 'up'} with Google</span>
+                      <span>Sign {showSignIn ? "in" : "up"} with Google</span>
                     </button>
 
                     {/* Sign with email */}
                     <Formik
-                      initialValues={{ email: '' }}
+                      initialValues={{ email: "" }}
                       validationSchema={SignInSchema}
                       validateOnBlur={false}
                       onSubmit={signInWithEmail}
@@ -243,14 +242,14 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                             className="mt-6 w-full bg-rose-600 text-white py-2 px-8 rounded-md focus:outline-none focus:ring-4 focus:ring-rose-600 focus:ring-opacity-50 hover:bg-rose-500 transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-rose-600"
                           >
                             {isSubmitting
-                              ? 'Loading...'
-                              : `Sign ${showSignIn ? 'in' : 'up'}`}
+                              ? "Loading..."
+                              : `Sign ${showSignIn ? "in" : "up"}`}
                           </button>
 
                           <p className="mt-2 text-center text-sm text-gray-500">
                             {showSignIn ? (
                               <>
-                                Don&apos;t have an account yet?{' '}
+                                Don&apos;t have an account yet?{" "}
                                 <button
                                   type="button"
                                   disabled={disabled}
@@ -266,7 +265,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                               </>
                             ) : (
                               <>
-                                Already have an account?{' '}
+                                Already have an account?{" "}
                                 <button
                                   type="button"
                                   disabled={disabled}
@@ -285,7 +284,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
 
                           <Confirm
                             show={showConfirm}
-                            email={values?.email ?? ''}
+                            email={values?.email ?? ""}
                           />
                         </Form>
                       )}

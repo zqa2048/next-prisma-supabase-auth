@@ -23,7 +23,9 @@ model Home {
     updatedAt   DateTime @updatedAt
     owner       User     @relation(fields: [ownerId], references: [id])
     ownerId     Int
+    likedUsers  User[]   @relation("favoriteHomesRelation")
 }
+
 
 model Account {
     id                 Int     @id @default(autoincrement())
@@ -63,7 +65,9 @@ model User {
     accounts      Account[]
     sessions      Session[]
     listedHomes   Home[]
+    favoriteHomes Home[]    @relation("favoriteHomesRelation")
 }
+
 
 model VerificationToken {
     identifier String

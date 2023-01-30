@@ -1,20 +1,19 @@
 import Layout from '@/components/Layout';
 import Grid from '@/components/Grid';
-import {  PrismaClient } from '@prisma/client'
 
+import { prisma } from "@/lib/prisma";
 
 // import homes from 'data.json';
 
-
-const prisma = new PrismaClient()
-
-export async function getServerSideProps(){
-  const homes = await prisma.home.findMany()
+export async function getServerSideProps() {
+  console.log("1111 :>> ", 1111);
+  const homes = await prisma.home.findMany();
+  console.log("homes :>> ", homes);
   return {
-    props:{
-      homes:JSON.parse(JSON.stringify(homes))
-    }
-  }
+    props: {
+      homes: JSON.parse(JSON.stringify(homes)),
+    },
+  };
 }
 
 
