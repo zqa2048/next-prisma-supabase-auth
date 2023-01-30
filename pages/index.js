@@ -1,9 +1,9 @@
 import Layout from '@/components/Layout';
 import Grid from '@/components/Grid';
 
-import { prisma } from "@/lib/prisma";
+import { PrismaClient } from "@prisma/client";
 
-// import homes from 'data.json';
+const prisma = new PrismaClient();
 
 export async function getServerSideProps() {
   console.log("1111 :>> ", 1111);

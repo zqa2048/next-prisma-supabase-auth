@@ -1,8 +1,10 @@
 import Layout from "@/components/Layout";
 import Grid from "@/components/Grid";
 import { getSession } from "next-auth/react";
-import { prisma } from "@/lib/prisma";
 import { useEffect, useState } from "react";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
