@@ -3,8 +3,10 @@ import Card from '@/components/Card';
 import { ExclamationIcon } from '@heroicons/react/outline';
 import { useState, useEffect } from "react";
 import axios from "node_modules/axios/index";
+import { useSession } from "next-auth/react";
 
 const Grid = ({ homes = [], handle }) => {
+  const { data: session } = useSession();
   const [favoList, setFavoList] = useState([]);
   const [changed, setChanged] = useState(false);
   const isEmpty = homes.length === 0;
@@ -16,10 +18,16 @@ const Grid = ({ homes = [], handle }) => {
   }, []);
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(`api/user/favorites`);
-      setFavoList(data ?? []);
+      if (session?.user) {
+        try {
+          const { data } = await axios.get(`api/user/favorites`);
+          setFavoList(data ?? []);
+        } catch (error) {
+          setFavoList([]);
+        }
+      }
     })();
-  }, [changed]);
+  }, [changed, session?.user]);
 
   const toggleFavorite = async (id) => {
     if (favoList.some((e) => e.id === id)) {
