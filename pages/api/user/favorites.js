@@ -7,7 +7,13 @@ export default async function handler(req, res) {
   const session = await getSession({ req });
 
   if (!session) {
-    return res.status(401).json({ message: "无权限", data: session });
+    return res.status(401).json({
+      message: "无权限",
+      data: {
+        session: JSON.stringify(session),
+        req,
+      },
+    });
   }
 
   if (req.method === "GET") {
