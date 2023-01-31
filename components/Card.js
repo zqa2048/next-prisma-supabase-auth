@@ -73,7 +73,7 @@ const Card = ({
 );
 
 Card.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   image: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
