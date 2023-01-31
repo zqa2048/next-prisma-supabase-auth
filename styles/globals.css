@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face{
+    font-family:'LXGW';
+    src: url('../public/fonts/LXGWWenKaiMonoLite-Light.ttf')
+}
+
+@font-face{
+    font-family:'LXGWB';
+    src: url('../public/fonts/LXGWWenKaiMonoLite-Regular.ttf')
+}
+@font-face{
+    font-family:'LXGWR';
+    src: url('../public/fonts/LXGWWenKai-Regular.ttf')
+}
+
+
+body{
+    font-family:  LXGWR;
+}

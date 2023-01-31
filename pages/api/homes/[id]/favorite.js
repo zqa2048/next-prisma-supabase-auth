@@ -1,7 +1,5 @@
 import { getSession } from "next-auth/react";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -11,8 +9,6 @@ export default async function handler(req, res) {
   const { id } = req.query;
 
   if (req.method === "PUT") {
-    // console.log('req', req)
-    console.log("id :>> ", id);
     try {
       const user = await prisma.user.update({
         where: { email: session.user.email },
@@ -25,7 +21,6 @@ export default async function handler(req, res) {
         },
       });
 
-      console.log("added to fav", user);
       res.status(200).json(user);
     } catch (error) {
       res.status(500).json({ message: "发生了一些错误" });

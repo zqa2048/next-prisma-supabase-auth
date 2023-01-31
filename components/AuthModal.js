@@ -72,38 +72,34 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
   const signInWithEmail = async ({ email }) => {
     // TODO: Perform email auth
     let toastId;
-    console.log('email', email)
-    try {
-      toastId = toast.loading('loading...')
-      setDisabled(true)
-      const { error } = await signIn('email',{
-        redirect:false,
-        callbackUrl:window.location.href,
-        email,
-      })
-      if(error){
-        console.log('失败时间')
-        throw new Error(error)
-      }
-      setConfirm(true)
-      toast.dismiss(toastId)
 
+    try {
+      toastId = toast.loading("loading...");
+      setDisabled(true);
+      const { error } = await signIn("email", {
+        redirect: false,
+        callbackUrl: window.location.href,
+        email,
+      });
+      if (error) {
+        throw new Error(error);
+      }
+      setConfirm(true);
+      toast.dismiss(toastId);
     } catch (error) {
-      toast.error('无法登录',{id:toastId})
-    } finally{
-      setDisabled(false)
+      toast.error("无法登录", { id: toastId });
+    } finally {
+      setDisabled(false);
     }
   };
 
   const signInWithGoogle = () => {
     // TODO: Perform Google auth
-      console.log("1111 :>> ", 1111);
-      toast.loading("跳转中");
-      setDisabled(true);
-      signIn("google", {
-        callbackUrl: window.location.href,
-      });
-
+    toast.loading("跳转中");
+    setDisabled(true);
+    signIn("google", {
+      callbackUrl: window.location.href,
+    });
   };
 
   const closeModal = () => {

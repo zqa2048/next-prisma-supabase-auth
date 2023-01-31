@@ -25,15 +25,13 @@ export default async function handler(req, res) {
         const ext = type.split("/")[1];
         const path = `${fileName}.${ext}`;
 
-        console.log("path", path);
-
         const { data, error: uploadError } = await supabase.storage
           .from(process.env.SUPABASE_BUCKET)
           .upload(path, decode(base64FileData), {
             contentType: type,
             upsert: true,
           });
-        console.log("data", data);
+
         if (uploadError) {
           throw new Error("图片存储失败");
         }
@@ -44,7 +42,6 @@ export default async function handler(req, res) {
         return res.status(200).json({ url });
       }
     } catch (error) {
-      console.log("error", error);
       res.status(500).json({ message: "服务器异常" });
     }
   } else {

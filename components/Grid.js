@@ -11,8 +11,6 @@ const Grid = ({ homes = [], handle }) => {
   const [changed, setChanged] = useState(false);
   const isEmpty = homes.length === 0;
 
-  console.log("homes :>> ", homes);
-  console.log("favoList :>> ", favoList);
   useEffect(() => {
     setChanged(!changed);
   }, []);
@@ -32,7 +30,6 @@ const Grid = ({ homes = [], handle }) => {
   const toggleFavorite = async (id) => {
     if (favoList.some((e) => e.id === id)) {
       await axios.delete(`api/homes/${id}/favorite`);
-      console.log("delete favo:", id);
     } else {
       await axios.put(`api/homes/${id}/favorite`);
     }

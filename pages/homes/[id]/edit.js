@@ -1,15 +1,12 @@
 import Layout from "@/components/Layout";
 import ListingForm from "@/components/ListingForm";
 import { getSession } from "next-auth/react";
-import { PrismaClient } from "@prisma/client";
 import axios from "node_modules/axios/index";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
 
-  console.log('session :>> ', session);
   const redirect = {
     redirect: {
       destination: "/",
@@ -28,7 +25,7 @@ export async function getServerSideProps(context) {
 
   const id = +context.params.id;
   const home = user?.listedHomes?.find((home) => home.id === id);
-  console.log('home :>> ', home);
+
   if (!home) {
     return redirect;
   }

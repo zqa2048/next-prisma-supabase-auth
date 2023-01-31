@@ -2,13 +2,11 @@ import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import nodemailer from "nodemailer";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
 import Handlebars from "handlebars";
 import { readFileSync } from "fs";
 import path from "path";
-import GoogleProvider from 'next-auth/providers/google'
-
-const prisma = new PrismaClient();
+import GoogleProvider from "next-auth/providers/google";
+import { prisma } from "@/lib/prisma";
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_SERVER_HOST,
@@ -32,10 +30,10 @@ const sendWelcomeEmail = async ({ user }) => {
       await transporter.sendMail({
         from: `"✨ 民宿" ${process.env.EMAIL_FROM}`,
         to: email,
-        subject: '欢迎登入! 🎉',
+        subject: "欢迎登入! 🎉",
         html: emailTemplate({
           base_url: process.env.NEXTAUTH_URL,
-          support_email: 'support@themodern.dev',
+          support_email: "2603682659@qq.com",
         }),
       });
     } catch (error) {

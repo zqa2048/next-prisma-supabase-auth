@@ -22,35 +22,32 @@ const ListingSchema = Yup.object().shape({
 
 const ListingForm = ({
   initialValues = null,
-  redirectPath = '',
-  buttonText = 'Submit',
+  redirectPath = "",
+  buttonText = "提交",
   onSubmit = () => null,
 }) => {
-
   const router = useRouter();
 
   const [disabled, setDisabled] = useState(false);
-  const [imageUrl, setImageUrl] = useState(initialValues?.image ?? '');
+  const [imageUrl, setImageUrl] = useState(initialValues?.image ?? "");
 
-
-  const upload = async image => {
+  const upload = async (image) => {
     // TODO: Upload image to remote storage
-    if(!image){
-      reutrn 
+    if (!image) {
+      reutrn;
     }
-    let toastId
+    let toastId;
     try {
-      setDisabled(true)
-      toastId = toast.loading('上传中...')
-      const { data } = await axios.post('/api/image-upload',{image})
-      setImageUrl(data?.url)
-      toast.success('上传成功',{id:toastId})
-
+      setDisabled(true);
+      toastId = toast.loading("上传中...");
+      const { data } = await axios.post("/api/image-upload", { image });
+      setImageUrl(data?.url);
+      toast.success("上传成功", { id: toastId });
     } catch (error) {
-      toast.error('上传失败',{id:toastId})
-      setImageUrl('')
-    } finally{
-      setDisabled(false)
+      toast.error("上传失败", { id: toastId });
+      setImageUrl("");
+    } finally {
+      setDisabled(false);
     }
   };
 
@@ -58,26 +55,26 @@ const ListingForm = ({
     let toastId;
     try {
       setDisabled(true);
-      toastId = toast.loading('Submitting...');
+      toastId = toast.loading("提交中...");
       // Submit data
-      if (typeof onSubmit === 'function') {
+      if (typeof onSubmit === "function") {
         await onSubmit({ ...values, image: imageUrl });
       }
-      toast.success('Successfully submitted', { id: toastId });
+      toast.success("提交成功", { id: toastId });
       // Redirect user
       if (redirectPath) {
         router.push(redirectPath);
       }
     } catch (e) {
-      toast.error('Unable to submit', { id: toastId });
+      toast.error("提交失败", { id: toastId });
       setDisabled(false);
     }
   };
 
   const { image, ...initialFormValues } = initialValues ?? {
-    image: '',
-    title: '',
-    description: '',
+    image: "",
+    title: "",
+    description: "",
     price: 0,
     guests: 1,
     beds: 1,
@@ -88,8 +85,12 @@ const ListingForm = ({
     <div>
       <div className="mb-8 max-w-md">
         <ImageUpload
-          initialImage={{ src: image, alt: initialFormValues.title }}
+          initialImage={{
+            src: image,
+            alt: initialFormValues.title,
+          }}
           onChangePicture={upload}
+          label={"图片"}
         />
       </div>
 
@@ -105,16 +106,16 @@ const ListingForm = ({
               <Input
                 name="title"
                 type="text"
-                label="Title"
-                placeholder="Entire rental unit - Amsterdam"
+                label="名称"
+                placeholder="房屋或酒店名字，如 西雅图四季酒店"
                 disabled={disabled}
               />
 
               <Input
                 name="description"
                 type="textarea"
-                label="Description"
-                placeholder="Very charming and modern apartment in Amsterdam..."
+                label="描述"
+                placeholder="西雅图四季酒店有非常迷人的现代风格公寓"
                 disabled={disabled}
                 rows={5}
               />
@@ -123,7 +124,7 @@ const ListingForm = ({
                 name="price"
                 type="number"
                 min="0"
-                label="Price per night"
+                label="每晚价格"
                 placeholder="100"
                 disabled={disabled}
               />
@@ -133,7 +134,7 @@ const ListingForm = ({
                   name="guests"
                   type="number"
                   min="0"
-                  label="Guests"
+                  label="住客"
                   placeholder="2"
                   disabled={disabled}
                 />
@@ -141,7 +142,7 @@ const ListingForm = ({
                   name="beds"
                   type="number"
                   min="0"
-                  label="Beds"
+                  label="床"
                   placeholder="1"
                   disabled={disabled}
                 />
@@ -149,7 +150,7 @@ const ListingForm = ({
                   name="baths"
                   type="number"
                   min="0"
-                  label="Baths"
+                  label="浴室"
                   placeholder="1"
                   disabled={disabled}
                 />
@@ -162,7 +163,7 @@ const ListingForm = ({
                 disabled={disabled || !isValid}
                 className="bg-rose-600 text-white py-2 px-6 rounded-md focus:outline-none focus:ring-4 focus:ring-rose-600 focus:ring-opacity-50 hover:bg-rose-500 transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-rose-600"
               >
-                {isSubmitting ? 'Submitting...' : buttonText}
+                {isSubmitting ? "提交中..." : buttonText}
               </button>
             </div>
           </Form>

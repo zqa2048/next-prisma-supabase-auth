@@ -20,39 +20,34 @@ import { useSession, signOut } from 'next-auth/react'
 
 const menuItems = [
   {
-    label: 'List a new home',
+    label: "添加房屋",
     icon: PlusIcon,
-    href: '/list',
+    href: "/create",
   },
   {
-    label: 'My homes',
+    label: "我的房屋",
     icon: HomeIcon,
-    href: '/homes',
+    href: "/homes",
   },
   {
-    label: 'Favorites',
+    label: "收藏夹",
     icon: HeartIcon,
-    href: '/favorites',
+    href: "/favorites",
   },
   {
-    label: 'Logout',
+    label: "退出登录",
     icon: LogoutIcon,
     onClick: () => signOut(),
   },
 ];
 
 const Layout = ({ children = null }) => {
-  
-  const { data:session,status} = useSession()
-  const user = session?.user
-  const isLoadingUser = status ==='loading'
-  
-  
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const isLoadingUser = status === "loading";
+
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
-
-
-
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -81,12 +76,13 @@ const Layout = ({ children = null }) => {
                 </a>
               </Link>
               <div className="flex items-center space-x-4">
-                <button onClick={()=>{
-                  console.log("session :>> ", session);
-                  session?.user ? router.push('/create') : openModal()
-                }}>
+                <button
+                  onClick={() => {
+                    session?.user ? router.push("/create") : openModal();
+                  }}
+                >
                   <a className="hidden sm:block hover:bg-gray-200 transition px-3 py-1 rounded-md">
-                    添加记录
+                    添加房屋
                   </a>
                 </button>
                 {isLoadingUser ? (
@@ -95,15 +91,14 @@ const Layout = ({ children = null }) => {
                   <Menu as="div" className="relative z-50">
                     <Menu.Button className="flex items-center space-x-px group">
                       <div className="shrink-0 flex items-center justify-center rounded-full overflow-hidden relative bg-gray-200 w-9 h-9">
-                        {user?.image ? (
-                          <Image
-                            src={user?.image}
-                            alt={user?.name || 'Avatar'}
-                            layout="fill"
-                          />
-                        ) : (
-                          <UserIcon className="text-gray-400 w-6 h-6" />
-                        )}
+                        <Image
+                          src={
+                            user?.image ??
+                            `https://api.dicebear.com/5.x/open-peeps/svg?seed=${user?.email}`
+                          }
+                          alt={user?.name || "Avatar"}
+                          layout="fill"
+                        />
                       </div>
                       <ChevronDownIcon className="w-5 h-5 shrink-0 text-gray-500 group-hover:text-current" />
                     </Menu.Button>
@@ -119,15 +114,14 @@ const Layout = ({ children = null }) => {
                       <Menu.Items className="absolute right-0 w-72 overflow-hidden mt-1 divide-y divide-gray-100 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="flex items-center space-x-2 py-4 px-4 mb-2">
                           <div className="shrink-0 flex items-center justify-center rounded-full overflow-hidden relative bg-gray-200 w-9 h-9">
-                            {user?.image ? (
-                              <Image
-                                src={user?.image}
-                                alt={user?.name || 'Avatar'}
-                                layout="fill"
-                              />
-                            ) : (
-                              <UserIcon className="text-gray-400 w-6 h-6" />
-                            )}
+                            <Image
+                              src={
+                                user?.image ??
+                                `https://api.dicebear.com/5.x/open-peeps/svg?seed=${user?.email}`
+                              }
+                              alt={user?.name || "Avatar"}
+                              layout="fill"
+                            />
                           </div>
                           <div className="flex flex-col truncate">
                             <span>{user?.name}</span>
@@ -185,7 +179,7 @@ const Layout = ({ children = null }) => {
 
         <main className="flex-grow container mx-auto">
           <div className="px-4 py-12">
-            {typeof children === 'function' ? children(openModal) : children}
+            {typeof children === "function" ? children(openModal) : children}
           </div>
         </main>
 

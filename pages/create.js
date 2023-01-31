@@ -6,7 +6,7 @@ import {getSession} from 'next-auth/react'
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log("session :>> ", session);
+
   if (!session?.user) {
     return {
       redirect: {
@@ -27,10 +27,8 @@ const Create = () => {
   return (
     <Layout>
       <div className="max-w-screen-sm mx-auto">
-        <h1 className="text-xl font-medium text-gray-800">List your home</h1>
-        <p className="text-gray-500">
-          Fill out the form below to list a new home.
-        </p>
+        <h1 className="text-xl font-medium text-gray-800">列出您的房屋</h1>
+        <p className="text-gray-500">填写下面的表格新增房屋.</p>
         <div className="mt-8">
           <ListingForm
             buttonText="添加房屋"

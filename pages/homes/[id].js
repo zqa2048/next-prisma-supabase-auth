@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Layout from "@/components/Layout";
-import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import  toast from 'react-hot-toast'
+import toast from "react-hot-toast";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const ListedHome = (home = null) => {
   const [isOwner, setIsOwner] = useState(false);
-  const [deleting, setDeleting] = useState(false)
+  const [deleting, setDeleting] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -19,8 +19,9 @@ const ListedHome = (home = null) => {
     (async () => {
       if (session?.user) {
         try {
-          const owner = await axios.get(`/api/homes/${home.id}/owner`);
-          setIsOwner(owner?.id === session.user.id);
+          const { data } = await axios.get(`/api/homes/${home.id}/owner`);
+          setIsOwner(data?.email === session.user.email);
+          console.log(1111111, data, session);
         } catch (e) {
           setIsOwner(false);
         }
@@ -28,21 +29,19 @@ const ListedHome = (home = null) => {
     })();
   }, [session?.user]);
 
-  const deleteHome = async ()=>{
-    let toastId
+  const deleteHome = async () => {
+    let toastId;
     try {
-      toastId = toast.lading()
-      setDeleting(true)
-      await axios.delete(`/api/homes/${home.id}`)
-      toast.success('删除成功',{id:toastId})
-      router.push('/homes')
+      toastId = toast.loading("删除中...");
+      setDeleting(true);
+      await axios.delete(`/api/homes/${home.id}`);
+      toast.success("删除成功", { id: toastId });
+      router.push("/homes");
     } catch (error) {
-      console.log('e :>> ', e);
-      toast.error('无法删除',{id:toastId})
-      setDeleting(false)
+      toast.error("无法删除", { id: toastId });
+      setDeleting(false);
     }
-
-  }
+  };
 
   if (router?.isFallback) {
     return "Loading...";
@@ -55,8 +54,22 @@ const ListedHome = (home = null) => {
             <h1 className="text-2xl font-semibold truncate">
               {home?.title ?? ""}
             </h1>
-            <div style={{ width: 300 }}>
-              <Image src={home?.image} width="100%" height="100%" />
+            <p style={{ color: "#0f0f0f" }}>{home?.description ?? ""}</p>
+            <br />
+            <div
+              style={{
+                width: 500,
+                height: "auto",
+                minHeight: 300,
+                position: "relative",
+              }}
+            >
+              <Image
+                src={home?.image}
+                objectFit="cover"
+                layout="fill"
+                className="hover:opacity-80 transition"
+              />
             </div>
             <br />
             <ol className="inline-flex items-center space-x-1 text-gray-500">
@@ -88,7 +101,7 @@ const ListedHome = (home = null) => {
               <button
                 type="button"
                 disabled={deleting}
-                onClick={deleteHome }
+                onClick={deleteHome}
                 className="rounded-md border border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white focus:outline-none transition disabled:bg-rose-500 disabled:text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-1"
               >
                 删除
@@ -107,7 +120,6 @@ export async function getStaticPaths() {
     select: { id: true },
   });
 
-  console.log("homes :>> ", homes);
   return {
     paths: homes.map((home) => ({
       params: { id: home.id + "" },
@@ -120,7 +132,7 @@ export async function getStaticProps({ params }) {
   const home = await prisma.home.findMany({
     where: { id: +params.id },
   });
-  console.log("home :>> ", home);
+
   if (home) {
     return {
       props: JSON.parse(JSON.stringify(home[0])),

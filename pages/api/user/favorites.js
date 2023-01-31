@@ -1,7 +1,5 @@
 import { getSession } from "next-auth/react";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -24,11 +22,9 @@ export default async function handler(req, res) {
           favoriteHomes: true,
         },
       });
-      console.log("process1111111 :>> ", process.env.NODE_ENV);
-      console.log("object22222222 :>> ", favoriteHomes);
+
       res.status(200).json(favoriteHomes);
     } catch (error) {
-      console.log("error :>> ", error);
       res.status(500).json({ message: "发生了一些错误" });
     }
   } else {
