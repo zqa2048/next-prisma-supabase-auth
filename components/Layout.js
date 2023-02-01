@@ -55,12 +55,12 @@ const Layout = ({ children = null }) => {
   return (
     <>
       <Head>
-        <title>SupaVacation | The Modern Dev</title>
+        <title>民宿 </title>
         <meta
           name="title"
           content="Learn how to Build a Fullstack App with Next.js, PlanetScale & Prisma | The Modern Dev"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/hotel.png" />
       </Head>
 
       <div className="min-h-screen flex flex-col">
@@ -188,6 +188,7 @@ const Layout = ({ children = null }) => {
               <a
                 href="https://github.com/zqa2048/next-prisma-supabase-auth"
                 target="_blank"
+                rel="noreferrer"
               >
                 乾坤团队
                 <svg
