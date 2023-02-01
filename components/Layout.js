@@ -55,7 +55,7 @@ const Layout = ({ children = null }) => {
   return (
     <>
       <Head>
-        <title>民宿 </title>
+        <title> ✨ 民宿 </title>
         <meta
           name="title"
           content="Learn how to Build a Fullstack App with Next.js, PlanetScale & Prisma | The Modern Dev"
