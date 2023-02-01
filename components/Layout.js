@@ -1,12 +1,12 @@
-import { Fragment, useState } from 'react';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/image';
+import { Fragment, useState } from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
 
-import PropTypes from 'prop-types';
-import AuthModal from './AuthModal';
-import { Menu, Transition } from '@headlessui/react';
+import PropTypes from "prop-types";
+import AuthModal from "./AuthModal";
+import { Menu, Transition } from "@headlessui/react";
 import {
   HeartIcon,
   HomeIcon,
@@ -14,9 +14,9 @@ import {
   PlusIcon,
   SparklesIcon,
   UserIcon,
-} from '@heroicons/react/outline';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { useSession, signOut } from 'next-auth/react'
+} from "@heroicons/react/outline";
+import { ChevronDownIcon } from "@heroicons/react/solid";
+import { useSession, signOut } from "next-auth/react";
 
 const menuItems = [
   {
@@ -182,7 +182,29 @@ const Layout = ({ children = null }) => {
             {typeof children === "function" ? children(openModal) : children}
           </div>
         </main>
-
+        <footer className="mt-8 container mx-auto">
+          <div className="px-4 py-6">
+            <p className="text-sm text-center cursor-pointer">
+              <a href="mailto:2603682659@qq.com">
+                乾坤团队
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  class="inline-block w-4 h-4 -mt-1 text-red-600 animate-pulse"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                提供技术驱动 - 2023
+              </a>
+            </p>
+          </div>
+        </footer>
         <AuthModal show={showModal} onClose={closeModal} />
       </div>
     </>

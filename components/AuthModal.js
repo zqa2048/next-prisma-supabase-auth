@@ -18,7 +18,7 @@ const SignInSchema = Yup.object().shape({
     .required('This field is required'),
 });
 
-const Confirm = ({ show = false, email = '' }) => (
+const Confirm = ({ show = false, email = "" }) => (
   <Transition appear show={show} as={Fragment}>
     <div className="fixed inset-0 z-50">
       <Transition.Child
@@ -48,14 +48,14 @@ const Confirm = ({ show = false, email = '' }) => (
               <div className="flex flex-col justify-center items-center space-y-4">
                 <MailOpenIcon className="w-12 h-12 shrink-0 text-rose-500" />
               </div>
-              <p className="text-2xl font-semibold mt-2">Confirm your email</p>
+              <p className="text-2xl font-semibold mt-2">确认邮件</p>
             </h3>
 
             <p className="text-lg text-center mt-4">
-              We emailed a magic link to <strong>{email ?? ''}</strong>.
+              我们用电子邮件向 <strong>{email ?? ""}</strong>
+              发送了一个登录的链接.
               <br />
-              Check your inbox and click the link in the email to login or sign
-              up.
+              检查你的收件箱，点击电子邮件中的链接登录或注册.
             </p>
           </div>
         </div>
@@ -190,7 +190,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                     as="h3"
                     className="mt-6 font-bold text-lg sm:text-2xl text-center"
                   >
-                    {showSignIn ? "Welcome back!" : "Create your account"}
+                    {showSignIn ? "欢迎回来!" : "创建您的帐户"}
                   </Dialog.Title>
 
                   {!showSignIn ? (
@@ -212,7 +212,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                         width={32}
                         height={32}
                       />
-                      <span>Sign {showSignIn ? "in" : "up"} with Google</span>
+                      <span>登录 {showSignIn ? "in" : "up"} 谷歌账号</span>
                     </button>
 
                     {/* Sign with email */}
@@ -227,7 +227,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                           <Input
                             name="email"
                             type="email"
-                            placeholder="elon@spacex.com"
+                            placeholder="xxxx@spacex.com"
                             disabled={disabled}
                             spellCheck={false}
                           />
@@ -245,7 +245,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                           <p className="mt-2 text-center text-sm text-gray-500">
                             {showSignIn ? (
                               <>
-                                Don&apos;t have an account yet?{" "}
+                                还没有账户?{" "}
                                 <button
                                   type="button"
                                   disabled={disabled}
@@ -261,7 +261,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                               </>
                             ) : (
                               <>
-                                Already have an account?{" "}
+                                已有帐户?{" "}
                                 <button
                                   type="button"
                                   disabled={disabled}

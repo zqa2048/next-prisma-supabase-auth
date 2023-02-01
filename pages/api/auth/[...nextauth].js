@@ -30,7 +30,7 @@ const sendWelcomeEmail = async ({ user }) => {
       await transporter.sendMail({
         from: `"✨ 民宿" ${process.env.EMAIL_FROM}`,
         to: email,
-        subject: "欢迎登入! 🎉",
+        subject: "欢迎登录! 🎉",
         html: emailTemplate({
           base_url: process.env.NEXTAUTH_URL,
           support_email: "2603682659@qq.com",
