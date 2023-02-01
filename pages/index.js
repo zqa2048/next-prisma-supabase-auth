@@ -27,7 +27,6 @@ export default function Home({ homes = [] }) {
   useEffect(() => {
     (async () => {
       const { data } = await axios.post(`api/homes/fetch`, { page });
-      console.log("data :>> ", data);
       if (data?.length < 4) {
         setIsHave(false);
         toast.success("全部加载完毕");

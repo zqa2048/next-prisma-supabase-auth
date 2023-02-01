@@ -5,11 +5,9 @@ const prisma = new PrismaClient();
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      console.log("req", req.body);
       const {
         body: { page },
       } = req;
-      console.log("page :>> ", page);
       const homes = await prisma.home.findMany({
         skip: page * 4,
         take: 4,
