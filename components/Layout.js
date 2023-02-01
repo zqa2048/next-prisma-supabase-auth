@@ -185,7 +185,7 @@ const Layout = ({ children = null }) => {
         <footer className="mt-8 container mx-auto">
           <div className="px-4 py-6">
             <p className="text-sm text-center cursor-pointer">
-              <a href="mailto:2603682659@qq.com">
+              <a href="https://github.com/zqa2048/next-prisma-supabase-auth">
                 乾坤团队
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
