@@ -42,7 +42,7 @@ export default function Home({ homes = [] }) {
   return (
     <Layout>
       <h1 className="text-xl font-medium text-gray-800">最受好评的住宿地点</h1>
-      <p className="text-gray-500">探索世界上一些最好的地方</p>
+      <p className="text-gray-500">一起探索那些美丽的房屋</p>
       <div className="mt-8">
         <Grid homes={list} />
       </div>
