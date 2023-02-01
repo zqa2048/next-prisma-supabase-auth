@@ -212,7 +212,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                         width={32}
                         height={32}
                       />
-                      <span>登录 {showSignIn ? "in" : "up"} 谷歌账号</span>
+                      <span>登录 谷歌账号</span>
                     </button>
 
                     {/* Sign with email */}
@@ -227,7 +227,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                           <Input
                             name="email"
                             type="email"
-                            placeholder="xxxx@spacex.com"
+                            placeholder="your@spacex.com"
                             disabled={disabled}
                             spellCheck={false}
                           />
@@ -237,9 +237,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                             disabled={disabled || !isValid}
                             className="mt-6 w-full bg-rose-600 text-white py-2 px-8 rounded-md focus:outline-none focus:ring-4 focus:ring-rose-600 focus:ring-opacity-50 hover:bg-rose-500 transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-rose-600"
                           >
-                            {isSubmitting
-                              ? "Loading..."
-                              : `Sign ${showSignIn ? "in" : "up"}`}
+                            {isSubmitting ? "Loading..." : `登录`}
                           </button>
 
                           <p className="mt-2 text-center text-sm text-gray-500">
@@ -255,7 +253,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                                   }}
                                   className="underline underline-offset-1 font-semibold text-rose-500 hover:text-rose-600 disabled:hover:text-rose-500 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                  Sign up
+                                  注册
                                 </button>
                                 .
                               </>
@@ -271,7 +269,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                                   }}
                                   className="underline underline-offset-1 font-semibold text-rose-500 hover:text-rose-600 disabled:hover:text-rose-500 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                  Log in
+                                  登录
                                 </button>
                                 .
                               </>
