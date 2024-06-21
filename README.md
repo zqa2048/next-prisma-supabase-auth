@@ -9,7 +9,7 @@
 * next-auth 提供auth2认证
 * tailwindcss 响应式布局
 
-### [预览地址](http://qiankun.design)
+### [预览地址](https://firday.cn:3366)
 
 
 ## 安装
