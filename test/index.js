@@ -28,12 +28,12 @@ const prisma = new PrismaClient()
 
 async function handler(req,res){
   try {
-    const home = await prisma.home.findMany({
-      skip:16,
-      take:8
-    });
+
+    const home = await prisma.home.findMany();
     console.log(home)
-  } catch (error) {}
+  } catch (error) {
+    console.log('error', error)
+  }
 }
 
 ;(async()=>{

@@ -8,6 +8,9 @@ import toast from "react-hot-toast";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
+const allHomes = await prisma.home.findMany();
+
+console.log('allHomes', allHomes);
 
 const ListedHome = (home = null) => {
   const [isOwner, setIsOwner] = useState(false);
@@ -128,13 +131,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const home = await prisma.home.findMany({
+  const home = await prisma.home.findUnique({
     where: { id: +params.id },
   });
 
   if (home) {
     return {
-      props: JSON.parse(JSON.stringify(home[0])),
+      props: JSON.parse(JSON.stringify(home)),
     };
   }
 
