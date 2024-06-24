@@ -5,7 +5,7 @@
     "build": "next build && pnpm start",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start -p 3366",
+    "start": "next start",
     "start:pro": "next build && next start",
     "postinstall": "npx prisma generate"
   },
