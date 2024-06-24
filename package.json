@@ -6,7 +6,8 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start -p 3366",
-    "start:pro": "next build && next start"
+    "start:pro": "next build && next start",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.3",
