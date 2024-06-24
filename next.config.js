@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
+    domains: [
       "fyttmstjltimxciympmq.supabase.in",
       "lh3.googleusercontent.com",
       "api.dicebear.com",
