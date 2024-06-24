@@ -8,9 +8,9 @@ import toast from "react-hot-toast";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-const allHomes = await prisma.home.findMany();
+// const allHomes = await prisma.home.findMany();
 
-console.log('allHomes', allHomes);
+// console.log('allHomes', allHomes);
 
 const ListedHome = (home = null) => {
   const [isOwner, setIsOwner] = useState(false);
